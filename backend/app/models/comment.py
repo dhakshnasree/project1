@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-class Comment(BaseModel):
-    user_id: int
+class CommentCreate(BaseModel):
+    clerk_id: str
     post_id: int
-    content: str
+    comment_text: str
