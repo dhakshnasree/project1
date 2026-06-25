@@ -122,7 +122,7 @@ const closeSearch = () => {
               </Link>
 
               <SignedOut>
-                <SignInButton mode="modal" afterSignInUrl="/" afterSignUpUrl="/">
+                <SignInButton mode="modal" signInFallbackRedirectUrl="/" signUpFallbackRedirectUrl="/">
                   <button className="bg-gray-900 text-white px-4 py-2 rounded-full text-sm hover:bg-black transition">
                     Login
                   </button>

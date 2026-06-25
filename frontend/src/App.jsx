@@ -1,5 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { SignedIn, SignedOut, SignIn } from "@clerk/clerk-react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { SignedIn, SignedOut } from "@clerk/clerk-react";
 
 import Navbar from "./components/Navbar";
 import FeedPage from "./pages/FeedPage";
@@ -13,9 +13,7 @@ function ProtectedCreatePost() {
         <CreatePostPage />
       </SignedIn>
       <SignedOut>
-        <div className="flex justify-center py-10">
-          <SignIn />
-        </div>
+        <Navigate to="/" replace />
       </SignedOut>
     </>
   );
@@ -30,10 +28,6 @@ export default function App() {
           <Routes>
             <Route path="/" element={<FeedPage />} />
             <Route path="/create" element={<ProtectedCreatePost />} />
-            {/*
-              Fixed: was /profile/:userId — but Navbar links to /profile (no param).
-              ProfilePage gets the clerk_id from useUser() directly, no URL param needed.
-            */}
             <Route path="/profile" element={<ProfilePage />} />
           </Routes>
         </main>
