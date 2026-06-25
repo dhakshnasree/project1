@@ -9,7 +9,7 @@ import {
 
 const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
-export default function PostCard({ post, dbUser, refresh }) {
+export default function Postcard({ post, dbUser, refresh }) {
   const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState("");

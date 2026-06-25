@@ -20,15 +20,16 @@ export default function UserSync({ children }) {
 
     const sync = async () => {
       setSyncing(true);
+
+      const username =
+        user.username ||
+        user.firstName ||
+        user.emailAddresses[0]?.emailAddress?.split("@")[0] ||
+        "user";
+
+      const email = user.emailAddresses[0]?.emailAddress || "";
+
       try {
-        const username =
-          user.username ||
-          user.firstName ||
-          user.emailAddresses[0]?.emailAddress?.split("@")[0] ||
-          "user";
-
-        const email = user.emailAddresses[0]?.emailAddress || "";
-
         const res = await fetch(`${API}/create-user`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -51,14 +52,22 @@ export default function UserSync({ children }) {
         });
       } catch (err) {
         console.error("UserSync error:", err);
-        setDbUser(null);
+        // Fallback: still set dbUser from Clerk data so likes/comments work
+        if (user?.id) {
+          setDbUser({
+            clerkId: user.id,
+            dbUserId: null,
+            username,
+            email,
+          });
+        }
       } finally {
         setSyncing(false);
       }
     };
 
     sync();
-  }, [isSignedIn, isLoaded, user?.id]); // use user?.id not user object
+  }, [isSignedIn, isLoaded, user?.id]);
 
   return (
     <UserContext.Provider value={{ dbUser, syncing }}>

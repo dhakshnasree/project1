@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import PostCard from "../components/PostCard";
+import PostCard from "../components/Postcard";
 import { Flame, TrendingUp } from "lucide-react";
 import { useDbUser } from "../context/UserContext";
 

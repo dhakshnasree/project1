@@ -1,12 +1,23 @@
-# Environment variables
-.env
-**/.env
+# ---------- frontend ----------
+frontend/node_modules/
+frontend/dist/
+frontend/.env
 
-# Python cache
+# ---------- backend ----------
+backend/venv/
+backend/.venv/
+backend/env/
+backend/.env
+backend/__pycache__/
+backend/**/*.pyc
+
+# ---------- root python cache ----------
 __pycache__/
-**/__pycache__/
 *.pyc
 
-# Frontend
-node_modules/
-dist/
+# ---------- editor/system ----------
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log
