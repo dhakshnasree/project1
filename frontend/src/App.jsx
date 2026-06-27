@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import { SignedIn, SignedOut } from "@clerk/clerk-react";
+import { SignedIn, SignedOut, SignInButton } from "@clerk/clerk-react";
 
 import Navbar from "./components/Navbar";
 import FeedPage from "./pages/FeedPage";
@@ -12,8 +12,18 @@ function ProtectedCreatePost() {
       <SignedIn>
         <CreatePostPage />
       </SignedIn>
+
       <SignedOut>
-        <Navigate to="/" replace />
+        <div className="text-center mt-10">
+          <p className="text-gray-600 mb-4">
+            You need to sign in to create a post.
+          </p>
+          <SignInButton mode="modal" fallbackRedirectUrl="/create">
+            <button className="bg-black text-white px-5 py-2 rounded-full hover:bg-gray-800 transition">
+              Login to Continue
+            </button>
+          </SignInButton>
+        </div>
       </SignedOut>
     </>
   );
@@ -21,7 +31,7 @@ function ProtectedCreatePost() {
 
 export default function App() {
   return (
-    <Router>
+    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <div className="min-h-screen bg-slate-50">
         <Navbar />
         <main className="max-w-2xl mx-auto px-4 py-6">
